@@ -28,6 +28,7 @@ body {
 	background-color: var(--white);
 	font-size: 1.6rem;
 	margin: 0;
+	padding: 0;
 }
 
 h1 {
@@ -75,7 +76,7 @@ img {
 .overview .container {
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: 60px;
+	gap: 40px;
 }
 
 .game-detail {
@@ -119,6 +120,7 @@ img {
 	gap: 25px;
 	padding: 100px;
 	padding-top: 50px;
+	text-align: center;
 }
 
 .design-by, .mentor {
@@ -130,9 +132,8 @@ img {
 }
 
 @media (min-width: 600px) {
-	body {background: red;}
 	.overview .container {
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: 1fr 0.4fr;
 	}
 
 	.link .container {
