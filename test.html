@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Search</title>
+    <style>
+        /* Add your CSS styles here */
+        #suggestions {
+            position: absolute;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            max-height: 150px;
+            overflow-y: auto;
+            z-index: 1;
+        }
+        #suggestions div {
+            padding: 10px;
+            cursor: pointer;
+        }
+        #suggestions div:hover {
+            background-color: #f1f1f1;
+        }
+
+	.selected {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="searchBox" placeholder="Search...">
+    <div id="suggestions" style="display: none;"></div>
+    <div id="imageContainer"></div>
+    <button id="openPDF">Open PDF</button>
+ <a id="sendEmail" href="mailto:pukpasut.dec@student.mahidol.edu">Send Email</a>
+    <script>
+        const searchBox = document.getElementById('searchBox');
+        const suggestions = document.getElementById('suggestions');
+        const imageContainer = document.getElementById('imageContainer');
+        let selectedSuggestionIndex = -1;
+
+        // Event listener for capturing user input in the search box
+        searchBox.addEventListener('input', function() {
+            const searchTerm = this.value.trim();
+
+            // Call a function to fetch and display suggestions based on the search term
+            fetchAndDisplaySuggestions(searchTerm);
+        });
+
+        // Event listener for capturing arrow key navigation
+        searchBox.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+                event.preventDefault();
+                navigateSuggestions(event.key);
+            } else if (event.key === 'Enter') {
+                event.preventDefault();
+                selectSuggestion();
+            }
+        });
+
+        // Function to fetch and display suggestions
+        function fetchAndDisplaySuggestions(searchTerm) {
+            // This is where you'd make an AJAX request to your server
+            // to fetch suggestions based on the search term
+
+            // For simplicity, let's assume you have a predefined array of suggestions
+            const suggestionsArray = ['apple', 'banana', 'car', 'dog'];
+
+            // Clear previous suggestions
+            suggestions.innerHTML = '';
+
+            // Display suggestions
+            suggestionsArray.forEach((suggestion, index) => {
+                if (suggestion.includes(searchTerm)) {
+                    const suggestionElement = document.createElement('div');
+                    suggestionElement.textContent = suggestion;
+                    suggestionElement.addEventListener('click', function() {
+                        selectSuggestion(index);
+                    });
+                    suggestions.appendChild(suggestionElement);
+                }
+            });
+
+            if (suggestions.children.length > 0) {
+                suggestions.style.display = 'block';
+            } else {
+                suggestions.style.display = 'none';
+            }
+        }
+
+        // Function to navigate through suggestions using arrow keys
+        function navigateSuggestions(key) {
+            const suggestionElements = suggestions.querySelectorAll('div');
+            const maxIndex = suggestionElements.length - 1;
+
+            if (key === 'ArrowUp') {
+                selectedSuggestionIndex = Math.max(selectedSuggestionIndex - 1, 0);
+            } else if (key === 'ArrowDown') {
+                selectedSuggestionIndex = Math.min(selectedSuggestionIndex + 1, maxIndex);
+            }
+
+            suggestionElements.forEach((suggestion, index) => {
+                suggestion.classList.toggle('selected', index === selectedSuggestionIndex);
+            });
+        }
+
+        // Function to select a suggestion
+        function selectSuggestion(index) {
+            if (index !== undefined) {
+                selectedSuggestionIndex = index;
+            }
+            const suggestionElements = suggestions.querySelectorAll('div');
+            if (selectedSuggestionIndex >= 0 && selectedSuggestionIndex < suggestionElements.length) {
+                searchBox.value = suggestionElements[selectedSuggestionIndex].textContent;
+                displayImage(searchBox.value);
+            }
+            suggestions.style.display = 'none';
+        }
+
+        // Function to display image based on the selected suggestion
+        function displayImage(suggestion) {
+            // Here you would make another AJAX request to your server
+            // to fetch the image corresponding to the selected suggestion
+
+            // For simplicity, let's assume you have a predefined object mapping
+            // suggestions to image URLs
+            const imageUrls = {
+                'apple': 'apple.jpg',
+                'banana': 'url_to_banana_image.jpg',
+                'car': 'url_to_car_image.jpg',
+                'dog': 'url_to_dog_image.jpg'
+            };
+
+            // Clear previous image
+            imageContainer.innerHTML = '';
+
+            // Display image if available
+            if (imageUrls.hasOwnProperty(suggestion)) {
+                const imageElement = document.createElement('img');
+                imageElement.src = imageUrls[suggestion];
+                imageContainer.appendChild(imageElement);
+            }
+        }
+	document.getElementById('openPDF').addEventListener('click', function() {
+            window.open('path.pdf', '_blank');
+        });
+	
+	 document.getElementById('copyText').addEventListener('click', function() {
+            const textToCopy = searchBox.value;
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    alert('Text copied to clipboard: ' + textToCopy);
+                })
+                .catch(err => {
+                    console.error('Failed to copy text: ', err);
+                });
+        });
+    </script>
+</body>
+</html>
+

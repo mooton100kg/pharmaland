@@ -1,0 +1,141 @@
+:root {
+	--white: rgb(255, 255, 255);
+	--pink: rgb(254, 177, 221);
+	--dark-pink: rgb(255, 164, 221);
+	--yellow: rgb(250, 220, 124);
+	--blue: rgb(76,138,240);
+
+	--ff-kanit: "Kanit", sans-serif;
+	--ff-jua: "Jua", sans-serif;
+
+	--fs-1: 8rem;
+	--fs-2: 3.2rem;
+	--fs-3: 1.7rem;
+	--fs-4: 1rem;
+
+	--shadow-2: 2px 0 15px 5px hsla(231, 94%, 7%, 0.06);
+	--border-radius: 10px;
+	--border: 5px solid var(--pink);
+}
+
+html {
+	font-size: 10px;
+	scroll-behavior: smooth;
+	margin: 0;
+}
+
+body {
+	background-color: var(--white);
+	font-size: 1.6rem;
+	margin: 0;
+}
+
+h1 {
+	font-family: var(--ff-jua);
+	font-size: var(--fs-1);
+	font-weight: 700;
+	margin: 0;
+	color: var(--yellow);
+	-webkit-text-stroke-width: 3px;
+	-webkit-text-stroke-color: var(--blue);
+}
+
+h2 {
+	font-family: var(--ff-kanit);
+	font-size: var(--fs-2);
+	margin: 0;
+}
+
+p {
+	font-family: var(--ff-kanit);
+	font-size: var(--fs-3);
+	margin: 0;
+}
+
+section:nth-child(odd) { background-color: var(--pink)}
+
+.container {
+	padding: 35px;
+}
+
+.overview {
+	text-align: left;
+}
+
+.game-banner {
+	display: flex;
+        justify-content: center; 
+}
+
+img {
+	max-width: 300px;
+	height: auto;
+}
+
+.overview .container {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 60px;
+}
+
+.overview p {
+	background-color: var(--white);
+	padding: 10px;
+	border-radius: var(--border-radius);
+}
+
+.link .container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+}
+
+.btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+ 	background-color: var(--white);
+	min-height: 60px;
+	border: var(--border);
+ 	border-radius: var(--border-radius);
+	box-shadow: var(--shadow-2);
+	text-align: center;
+}
+
+.btn:hover {
+	cursor: pointer;
+	background-color: var(--pink);
+}
+
+.rule-book, .video { grid-column: 1 / span 2;}
+
+.credit .container {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 25px;
+	padding-left: 70px;
+}
+
+.design-by, .mentor {
+	align-items: center;
+}
+
+.email {
+	font-size: var(--fs-4);
+}
+
+@media (min-width: 600px) {
+	.overview .container {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.link .container {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
+
+	.rule-book, .video { grid-column: 1 / span 4;}
+
+	.credit .container {
+		grid-template-columns: 1fr 1fr;
+	}
+}
