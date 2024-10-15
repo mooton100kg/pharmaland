@@ -21,3 +21,16 @@ function openKey3(){
 function openKey4(){
 	window.open('./assets/key4.jpg', '_blank');
 }
+
+function openKey5(){
+	window.open('./assets/key5.pdf', '_blank');
+}
+
+var swiper = new Swiper(".mySwiper", {
+	centeredSlides: true,
+	autoplay: {
+		delay: 5500,
+		disableOnInteraction: true,
+	},
+});
+

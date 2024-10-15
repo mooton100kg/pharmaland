@@ -33,10 +33,10 @@ body {
 h1 {
 	font-family: var(--ff-jua);
 	font-size: var(--fs-1);
-	font-weight: 700;
+	font-weight: 900;
 	margin: 0;
-	color: var(--yellow);
-	-webkit-text-stroke-width: 3px;
+	-webkit-text-fill-color: var(--yellow);
+	-webkit-text-stroke-width: 1px;
 	-webkit-text-stroke-color: var(--blue);
 }
 
@@ -54,12 +54,34 @@ p {
 
 section:nth-child(odd) { 
 	background-color: var(--pink);
-    	background-image: url('./assets/pat.jpg')
+    	background-image: url('./assets/pat.jpg');
+}
+
+section {
+	margin: 0;
+	padding: 0;
 }
 
 img {
-	max-width: 100%;
+	width: 100%;
 	height: auto;
+	margin-bottom: -4px;
+}
+
+.mySwiper {
+	width: 100%;
+	height: 30vh;
+	object-fit: cover;
+	transition: 0.2s;
+	transform-origin: bottom;
+}
+
+.mySwiper:hover {
+	height: 50vh;
+}
+
+.swiper-wrapper {
+	height: 70%;
 }
 
 .container {
@@ -111,7 +133,7 @@ img {
 	background-color: var(--pink);
 }
 
-.rule-book, .video { grid-column: 1 / span 2;}
+.rule-book, .video, .key5 { grid-column: 1 / span 2;}
 
 .credit .container {
 	display: grid;
@@ -137,7 +159,7 @@ img {
 		grid-template-columns: 1fr 1fr 1fr 1fr;
 	}
 
-	.rule-book, .video { grid-column: 1 / span 4;}
+	.rule-book, .video, .key5 { grid-column: 1 / span 4;}
 
 	.credit .container {
 		grid-template-columns: 1fr 1fr;
@@ -151,4 +173,14 @@ img {
 		--fs-3: 2.2rem;
 		--fs-4: 1.3rem;
 	}	
+}
+
+@media (max-width: 599px) {
+	img {
+		width: 40%;
+		height: auto;
+	}
+	.img-slide {
+		width: 100%;
+	}
 }
